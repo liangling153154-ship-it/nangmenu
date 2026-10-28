@@ -34,7 +34,7 @@
      Cà phê · Trà|Matcha · Trà sữa|Trà chanh · Đồ uống khác|Đồ ăn nhẹ.
      Signature đã chuyển sang menu riêng (menu-special.html).
      Cột phải: Sinh tố · Nước ép · minh hoạ quán.
-     Hai cột dùng space-between → khoảng trống dư chia đều giữa các hàng.
+     Hai cột dùng chung chiều cao hàng + khe --rhythm → các hàng thẳng nhau.
      ========================================================== */
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -64,23 +64,21 @@
     --fs-en:    26px;   /* tên tiếng Anh dưới tên Việt */
     --fs-sub:   29px;   /* nhãn phụ  (A3: 26) +12% */
 
-    /* Nhịp dọc */
-    --rhythm:    200px; /* khoảng cách TỐI THIỂU giữa các hàng */
+    /* Nhịp dọc — khe giữa các hàng nội dung. Chỉ cần sửa số này để
+       nới ra hay siết lại; cả hai cột đổi theo và vẫn thẳng hàng. */
+    --rhythm:    200px;
     --gap-left:  134px; /* khoảng cách TỐI THIỂU giữa các mục trong lưới so le */
 
-    /* Chiều cao 4 HÀNG dùng chung cho cả hai cột → tiêu đề hai bên thẳng hàng.
+    /* Chiều cao 3 HÀNG dùng chung cho cả hai cột → đầu mục hai bên thẳng hàng.
        Mỗi số = chiều cao thực của cụm cao nhất trong hàng đó:
-         hàng 1  Cà phê 690 (Robusta | Arabica cạnh nhau)  ↔  Sinh tố 644
-         hàng 2  Trà 644                                   ↔  Nước ép 644
-         hàng 3  Matcha 644                                ↔  Đồ uống khác 632
-         hàng 4  Trà sữa | Trà chanh 594                   ↔  Đồ ăn nhẹ 582 + minh hoạ
-       Tổng 2572px trong vùng 3250px → align-content chia đều phần dư
-       thành 3 khe 226px bằng nhau ở CẢ HAI cột. Nội dung giữ nguyên cỡ,
-       phần dư chỉ nằm ở các khe chứ không kéo giãn món nào. */
-    --row1: 690px;
-    --row2: 644px;
-    --row3: 644px;
-    --row4: 594px;
+         hàng 1  trái Cà phê 1344  |  phải Sinh tố 644 + Nước ép 644
+         hàng 2  trái Trà|Matcha 644  |  phải Đồ uống khác 632
+         hàng 3  trái Trà sữa|Trà chanh 594  |  phải Đồ ăn nhẹ 582 + minh hoạ
+       Tổng 2582px + 2 khe 200px = 2982px trong vùng 3250px → các hàng dồn
+       lên trên, phần dư 268px nằm ở đáy. Khe bằng nhau ở CẢ HAI cột. */
+    --row1: 1344px;
+    --row2:  644px;
+    --row3:  594px;
 
     /* Huy hiệu sao — ĐANG THỬ NGHIỆM. Hai số duy nhất cần chỉnh khi đánh giá. */
     --star-size:   72px;  /* đường kính sao        */
@@ -139,9 +137,9 @@
   .col-left,
   .col-right {
     display: grid;
-    grid-template-rows: var(--row1) var(--row2) var(--row3) var(--row4);
-    align-content: space-between;
-    row-gap: 120px;          /* khe tối thiểu; thực tế space-between nới ra 226px */
+    grid-template-rows: var(--row1) var(--row2) var(--row3);
+    align-content: start;    /* dồn các hàng lên trên, phần dư nằm ở đáy */
+    row-gap: var(--rhythm);  /* khe cố định 200px, bằng nhau ở cả hai cột */
   }
   .col-left {
     width: 2959px;           /* 62% — cột đặc hơn, cần bề ngang */
@@ -151,6 +149,12 @@
   }
   .col-right {
     flex: 1;                 /* 1813px — thoáng hơn theo chủ đích */
+  }
+  /* Hàng 1 cột phải chứa hai mục xếp dọc, chia đều trong chiều cao hàng */
+  .right-row1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   /* Đồ ăn nhẹ + minh hoạ: hàng cuối cột phải, minh hoạ ở góc phải dưới */
@@ -216,13 +220,11 @@
     margin-bottom: 18px;     /* 35 + 18 = 53px */
   }
 
-  /* Cà phê: Robusta và Arabica đứng cạnh nhau trong cùng hàng 1, mỗi nhóm
-     giữ nhãn riêng, tách bằng khoảng trắng (không kẻ line).
-     Ngân sách bề ngang 2869px: 3×315+2×40 = 1025  ·  64  ·  5×315+4×40 = 1735 → 2824px. */
+  /* Cà phê: Robusta và Arabica là hai nhóm chồng nhau, tách bằng khoảng trắng (không kẻ line). */
   .coffee-groups {
     display: flex;
-    gap: 64px;
-    align-items: flex-start;
+    flex-direction: column;
+    gap: 72px;
   }
 
   /* ---------- Hàng sản phẩm ---------- */
@@ -500,7 +502,9 @@
           </div>
         </section>
 
-        <!-- HÀNG 2 · TRÀ — ngang với Nước ép bên cột phải -->
+        <!-- 2 · TRÀ  |  3 · MATCHA -->
+        <div class="row-2col" style="--colgap:64px;">
+
           <section class="category" data-od-id="category-tra">
             <div class="category-header">
               <span class="category-number">2</span>
@@ -550,7 +554,6 @@
             </div>
           </section>
 
-        <!-- HÀNG 3 · MATCHA — ngang với Đồ uống khác bên cột phải -->
           <section class="category" data-od-id="category-matcha">
             <div class="category-header">
               <span class="category-number">3</span>
@@ -584,7 +587,9 @@
             </div>
           </section>
 
-        <!-- HÀNG 4 · TRÀ SỮA | TRÀ CHANH — ngang với Đồ ăn nhẹ + minh hoạ -->
+        </div>
+
+        <!-- 4 · TRÀ SỮA  |  5 · TRÀ CHANH -->
         <div class="row-2col" style="--colgap:64px;">
 
           <section class="category" data-od-id="category-tra-sua">
@@ -668,7 +673,10 @@
       <!-- ================= CỘT PHẢI ================= -->
       <div class="col-right">
 
-        <!-- HÀNG 1 · SINH TỐ - SỮA CHUA — ngang với Cà phê bên cột trái -->
+        <!-- HÀNG 1 cột phải: ngang với cụm Cà phê bên trái -->
+        <div class="right-row1">
+
+        <!-- 6 · SINH TỐ - SỮA CHUA -->
         <section class="category" data-od-id="category-sinh-to">
           <div class="category-header">
             <span class="category-number">6</span>
@@ -718,7 +726,7 @@
           </div>
         </section>
 
-        <!-- HÀNG 2 · NƯỚC ÉP — ngang với Trà bên cột trái -->
+        <!-- 7 · NƯỚC ÉP -->
         <section class="category" data-od-id="category-nuoc-ep">
           <div class="category-header">
             <span class="category-number">7</span>
@@ -768,7 +776,10 @@
           </div>
         </section>
 
-        <!-- HÀNG 3 · ĐỒ UỐNG KHÁC — ngang với Matcha bên cột trái -->
+        </div>
+
+        <!-- HÀNG 2 cột phải: ngang với cụm Trà · Matcha bên trái -->
+        <!-- 8 · ĐỒ UỐNG KHÁC — chuyển về cột phải như bố cục cũ -->
         <section class="category" data-od-id="category-do-uong-khac">
           <div class="category-header">
             <span class="category-number">8</span>
