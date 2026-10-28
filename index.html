@@ -65,8 +65,19 @@
     --fs-sub:   29px;   /* nhãn phụ  (A3: 26) +12% */
 
     /* Nhịp dọc */
-    --rhythm:    200px; /* nhịp chung giữa các mục — Cà phê → lưới, và giữa các mục cột phải */
+    --rhythm:    200px; /* khoảng cách TỐI THIỂU giữa các hàng */
     --gap-left:  134px; /* khoảng cách TỐI THIỂU giữa các mục trong lưới so le */
+
+    /* Chiều cao 3 HÀNG dùng chung cho cả hai cột → đầu mục hai bên thẳng hàng.
+       Mỗi số = chiều cao thực của cụm cao nhất trong hàng đó:
+         hàng 1  trái Cà phê 1344  |  phải Sinh tố 644 + Nước ép 644
+         hàng 2  trái Trà|Matcha 644  |  phải Đồ uống khác 632
+         hàng 3  trái Trà sữa|Trà chanh 594  |  phải Đồ ăn nhẹ 582 + minh hoạ
+       Tổng 2582px trong vùng 3250px → align-content chia đều phần dư
+       thành 2 khe 334px bằng nhau ở CẢ HAI cột. */
+    --row1: 1344px;
+    --row2:  644px;
+    --row3:  594px;
 
     /* Huy hiệu sao — ĐANG THỬ NGHIỆM. Hai số duy nhất cần chỉnh khi đánh giá. */
     --star-size:   72px;  /* đường kính sao        */
@@ -120,33 +131,37 @@
     padding: 34px 72px;      /* vùng nội dung: 4856 × 3250 px */
     gap: 84px;
   }
+  /* Hai cột là hai lưới CÙNG chiều cao hàng → mỗi hàng bắt đầu ở đúng một
+     độ cao trên cả hai bên, và phần dư được chia đều thành các khe bằng nhau. */
+  .col-left,
+  .col-right {
+    display: grid;
+    grid-template-rows: var(--row1) var(--row2) var(--row3);
+    align-content: space-between;
+    row-gap: var(--rhythm);
+  }
   .col-left {
     width: 2959px;           /* 62% — cột đặc hơn, cần bề ngang */
     flex: none;
-    display: flex;
-    flex-direction: column;
-    /* 3 cụm nối tiếp nhau theo nhịp --rhythm, KHÔNG giãn đều hết chiều cao:
-       phần dư dồn xuống đáy, chừa chỗ cho Trà chanh khi điền món thật. */
-    justify-content: flex-start;
-    gap: var(--rhythm);
     border-right: 2px solid var(--rule);
     padding-right: 88px;     /* nội dung thực: 2869px */
   }
   .col-right {
     flex: 1;                 /* 1813px — thoáng hơn theo chủ đích */
+  }
+  /* Hàng 1 cột phải chứa hai mục xếp dọc, chia đều trong chiều cao hàng */
+  .right-row1 {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
-  .col-right > .category + .category { margin-top: var(--rhythm); }
 
-  /* Đồ ăn nhẹ + minh hoạ: neo đáy cột phải, minh hoạ ở góc phải dưới */
+  /* Đồ ăn nhẹ + minh hoạ: hàng cuối cột phải, minh hoạ ở góc phải dưới */
   .snack-block {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     gap: 60px;
-    margin-top: auto;
-    padding-top: var(--rhythm);
   }
 
   /* ---------- Mục ---------- */
@@ -657,6 +672,9 @@
       <!-- ================= CỘT PHẢI ================= -->
       <div class="col-right">
 
+        <!-- HÀNG 1 cột phải: ngang với cụm Cà phê bên trái -->
+        <div class="right-row1">
+
         <!-- 6 · SINH TỐ - SỮA CHUA -->
         <section class="category" data-od-id="category-sinh-to">
           <div class="category-header">
@@ -757,6 +775,9 @@
           </div>
         </section>
 
+        </div>
+
+        <!-- HÀNG 2 cột phải: ngang với cụm Trà · Matcha bên trái -->
         <!-- 8 · ĐỒ UỐNG KHÁC — chuyển về cột phải như bố cục cũ -->
         <section class="category" data-od-id="category-do-uong-khac">
           <div class="category-header">
