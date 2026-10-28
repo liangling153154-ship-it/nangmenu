@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="vi"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menu Nâng Cafe 15-09 - Bảng Ngang B3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@800&amp;family=Bitter:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Poppins:wght@800&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet">
+<style>
+  /* Fallback style for image-slot when viewed in browser */
+  image-slot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #e8e0d0 0%, #d4cbbe 100%);
+    border: 2px dashed #a89f8f;
+    color: #8b7355;
+    font-size: 14px;
+    text-align: center;
+  }
+  image-slot::before {
+    content: "Ảnh chưa có";
+  }
+</style>
+<style>
+  /* ==========================================================
+     NÂNG CAFE — BẢNG NGANG B3
+     Khổ in: 500 × 353 mm (B3 ngang) · 10px = 1mm → 5000 × 3530 px
+     Bố cục dựng riêng cho B3: cột trái rộng 62% chứa 4 hàng
+     Cà phê · Trà|Matcha · Trà sữa|Trà chanh · Đồ uống khác|Đồ ăn nhẹ.
+     Signature đã chuyển sang menu riêng (menu-special.html).
+     Cột phải: Sinh tố · Nước ép · minh hoạ quán.
+     Hai cột dùng space-between → khoảng trống dư chia đều giữa các hàng.
+     ========================================================== */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Bảng màu — giữ nguyên nhận diện cũ */
+    --paper:  #f6eddd;
+    --ink:    #12333a;
+    --deep:   #0e4a52;
+    --orange: #f2a05c;
+    --gold:   #b07b3e;
+    --rule:   #d8c7ac;
+    --muted:  #6b6964;
+    --desc:   #7a756e;
+
+    /* Font tiêu đề nhóm.
+       Poppins KHÔNG có bộ ký tự tiếng Việt (thiếu U+1EA0-1EF1, Đ, ă, ư, ơ),
+       nên Be Vietnam Pro đứng ngay sau để nhận các ký tự có dấu.
+       Muốn toàn bộ tiêu đề đồng nhất một font: đổi dòng dưới thành
+       'Be Vietnam Pro', sans-serif  (hoặc 'Montserrat', sans-serif). */
+    --font-head: 'Poppins', 'Be Vietnam Pro', sans-serif;
+
+    /* Thang chữ B3 — lớn hơn bản A3 để đọc rõ khi in */
+    --fs-title: 62px;   /* tên mục   (A3: 56) +11% */
+    --fs-num:   42px;   /* số trong vòng tròn (A3: 38) +11% */
+    --fs-name:  40px;   /* tên món   (A3: 36) +11% */
+    --fs-price: 34px;   /* giá       (A3: 30) +13% */
+    --fs-en:    26px;   /* tên tiếng Anh dưới tên Việt */
+    --fs-sub:   29px;   /* nhãn phụ  (A3: 26) +12% */
+
+    /* Nhịp dọc */
+    --rhythm:    200px; /* nhịp chung giữa các mục — Cà phê → lưới, và giữa các mục cột phải */
+    --gap-left:  134px; /* khoảng cách TỐI THIỂU giữa các mục trong lưới so le */
+
+    /* Huy hiệu sao — ĐANG THỬ NGHIỆM. Hai số duy nhất cần chỉnh khi đánh giá. */
+    --star-size:   72px;  /* đường kính sao        */
+    --star-offset: 12px;  /* độ nhô ra khỏi góc ảnh */
+  }
+
+  body {
+    margin: 0;
+    background: #d9d2c7;
+    font-family: 'Source Serif 4', serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .menu-wrapper { padding: 48px; }
+
+  .menu-board {
+    width: 5000px;
+    height: 3530px;
+    background: var(--paper);
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 24px 60px rgba(14,74,82,.25);
+  }
+
+  /* ---------- Header ---------- */
+  .board-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 72px;      /* 26 + 160 + 26 = 212px */
+    flex: none;
+  }
+  .board-header img { height: 160px; width: auto; border-radius: 12px; display: block; }
+  .header-note {
+    text-align: right;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    line-height: 1.3;
+  }
+  .header-note .hours { margin-top: 8px; opacity: .7; }
+
+  /* ---------- Khung 2 cột ---------- */
+  .board-main {
+    flex: 1;
+    display: flex;
+    padding: 34px 72px;      /* vùng nội dung: 4856 × 3250 px */
+    gap: 84px;
+  }
+  .col-left {
+    width: 2959px;           /* 62% — cột đặc hơn, cần bề ngang */
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    /* 3 cụm nối tiếp nhau theo nhịp --rhythm, KHÔNG giãn đều hết chiều cao:
+       phần dư dồn xuống đáy, chừa chỗ cho Trà chanh khi điền món thật. */
+    justify-content: flex-start;
+    gap: var(--rhythm);
+    border-right: 2px solid var(--rule);
+    padding-right: 88px;     /* nội dung thực: 2869px */
+  }
+  .col-right {
+    flex: 1;                 /* 1813px — thoáng hơn theo chủ đích */
+    display: flex;
+    flex-direction: column;
+  }
+  .col-right > .category + .category { margin-top: var(--rhythm); }
+
+  /* Đồ ăn nhẹ + minh hoạ: neo đáy cột phải, minh hoạ ở góc phải dưới */
+  .snack-block {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 60px;
+    margin-top: auto;
+    padding-top: var(--rhythm);
+  }
+
+  /* ---------- Mục ---------- */
+  .category { display: flex; flex-direction: column; }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    height: 80px;
+    margin-bottom: 28px;
+  }
+  .category-header.center { justify-content: center; }
+
+  .category-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--orange);
+    color: var(--deep);
+    font-family: 'Bitter', serif;
+    font-size: var(--fs-num);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .category-title {
+    font-family: var(--font-head);
+    font-size: var(--fs-title);
+    font-weight: 800;
+    color: var(--deep);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  .category-note {
+    font-size: 38px;
+    color: var(--gold);
+    font-style: italic;
+    margin-left: 24px;
+    white-space: nowrap;
+  }
+
+  .sub-label {
+    font-size: var(--fs-sub);
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    line-height: 1.2;
+    margin-bottom: 18px;     /* 35 + 18 = 53px */
+  }
+
+  /* Cà phê: Robusta và Arabica là hai nhóm chồng nhau, tách bằng khoảng trắng (không kẻ line). */
+  .coffee-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+  }
+
+  /* ---------- Hàng sản phẩm ---------- */
+  .products-row {
+    display: flex;
+    gap: var(--gap, 40px);
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+  .products-row.center { justify-content: center; }
+
+  .row-2col {
+    display: flex;
+    gap: var(--colgap, 64px);
+    align-items: flex-start;
+  }
+
+  /* ---------- Sản phẩm ----------
+     .shot có chiều cao cố định + canh đáy → mọi ly thẳng chân đế.
+     .name / .name-en đặt min-height theo số dòng → mọi mức giá
+     trong cùng một hàng nằm đúng một đường ngang.            */
+  .product {
+    width: var(--pw, 300px);
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .shot {
+    height: var(--shot, 300px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .shot img {
+    display: block;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.22));
+  }
+  .product .name {
+    display: block;
+    font-family: 'Source Serif 4', serif;
+    font-size: var(--fs-name);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+    min-height: calc(var(--name-lines, 2) * 1.25em);
+  }
+  /* Tên tiếng Anh — một dòng ngay dưới tên Việt (thay cho mô tả cũ).
+     Tên dài nhất ~26 ký tự ≈ 310px ở 26px, vừa mọi ô ≥ 290px. */
+  .product .name-en {
+    display: block;
+    font-family: 'Source Serif 4', serif;
+    font-size: var(--fs-en);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--desc);
+    line-height: 1.2;
+    margin-top: 8px;
+    min-height: 1.2em;
+    white-space: nowrap;
+  }
+  .product .price {
+    display: block;
+    font-family: 'Bitter', serif;
+    font-size: var(--fs-price);
+    font-weight: 400;
+    color: var(--muted);
+    opacity: .6;
+    line-height: 1.2;
+    margin-top: 14px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Ô giữ chỗ — mục Trà chanh, chưa có ảnh & nội dung ----------
+     Khung nét đứt theo đúng màu đường kẻ của menu, KHÔNG phải hộp xám,
+     và chiếm đúng 258×258px như ảnh mục Trà sữa để bố cục đã đúng chỗ
+     ngay từ bây giờ — thay ảnh thật vào là không phải chỉnh lại gì.
+     Khi có nội dung: đổi <div class="ph-shot"> thành <img …> và bỏ
+     class .tbd ở tên / mô tả / giá. Xoá hai quy tắc này là sạch dấu vết. */
+  .ph-shot {
+    width: 258px;
+    height: 258px;
+    border: 3px dashed var(--rule);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-head);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .product .tbd { color: var(--gold); opacity: .55; }
+
+  /* ---------- Huy hiệu sao — ĐANG THỬ NGHIỆM trên 4 món ----------
+     .starred chỉ bọc quanh ảnh để sao bám đúng góc ảnh thật, không bám
+     vào ô sản phẩm (ảnh hẹp hơn ô ở mục Matcha và Arabica).
+     Gỡ thử nghiệm: xoá 4 thẻ <svg class="star-badge"> và 4 lớp .starred. */
+  .shot .starred {
+    position: relative;
+    display: block;
+    flex: none;
+    line-height: 0;
+  }
+  /* Vị trí sao neo theo MIỆNG LY, không theo góc khung ảnh.
+     Lý do: 4 file PNG chừa nền trong suốt rất khác nhau — mép phải
+     của khung ảnh cách thân ly từ 42px (Cold Brew) đến 91px (Matcha,
+     Trà vải mận). Neo vào góc khung thì sao trôi ra giữa vùng trong
+     suốt, nhìn như lơ lửng cách ly cả centimet trên bản in B3.
+     Nên mỗi món có --star-top / --star-right riêng, tính bằng đúng
+     phần đệm trong suốt đo được của từng file. Số khác nhau, nhưng
+     khoảng cách THẤY ĐƯỢC từ sao tới ly thì giống hệt nhau ở cả 4.
+     --star-offset bên dưới chỉ còn là giá trị dự phòng cho món nào
+     chưa khai báo riêng. */
+  .star-badge {
+    position: absolute;
+    top:   var(--star-top,   calc(-1 * var(--star-offset)));
+    right: var(--star-right, calc(-1 * var(--star-offset)));
+    width:  var(--star-size);
+    height: var(--star-size);
+    display: block;
+    overflow: visible;
+  }
+  /* Hình sao dựng bằng hai lớp chồng nhau, cùng một đa giác 10 đỉnh.
+     stroke-linejoin:round bo mọi góc với bán kính = nửa độ dày nét —
+     đó là nguồn gốc của đầu sao mềm và khe lõm tròn.
+       .rim  (10)  nằm dưới, chỉ lộ ra phần mép teal
+       .body (6)   nằm trên, nét cam + tô cam che hết ruột nét teal
+     Hiệu số 4 → viền teal dày 2 đơn vị ≈ 0,12mm khi in B3.
+     Muốn viền mảnh như bản swatch: hạ .rim xuống 7.6 (viền 0,8 đơn vị).
+     Muốn bỏ hẳn viền: xoá quy tắc .rim và 4 thẻ <path class="rim">. */
+  .star-badge .rim {
+    fill: none;
+    stroke: var(--deep);
+    stroke-width: 10;
+    stroke-linejoin: round;
+  }
+  .star-badge .body {
+    fill: var(--orange);
+    stroke: var(--orange);
+    stroke-width: 6;
+    stroke-linejoin: round;
+  }
+
+  /* Minh hoạ quán — góc phải dưới, cạnh Đồ ăn nhẹ.
+     Bề ngang còn lại: 1813 − (3 × 360 + 2 × 32) − 60 = 609px */
+  .sketch {
+    display: block;
+    width: 600px;
+    height: 527px;           /* 1339 × 1175 → tỉ lệ 1.1396 giữ nguyên */
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    flex: none;
+  }
+
+  /* ---------- Chuẩn in B3 ngang, không lề ---------- */
+  @page { size: 500mm 353mm; margin: 0; }
+  @media print {
+    html, body { background: var(--paper); }
+    .menu-wrapper { padding: 0; }
+    .menu-board { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="menu-wrapper">
+  <div class="menu-board" data-od-id="menu-board">
+
+    <!-- Header -->
+    <header class="board-header" data-od-id="header">
+      <img src="assets/logo-nang-cafe.jpg" alt="Nâng Cafe">
+      <div class="header-note">
+        <div>giá nghìn đồng · đá / nóng cùng giá</div>
+        <div class="hours">7:00 — 22:00</div>
+      </div>
+    </header>
+
+    <!-- Nội dung: 2 cột -->
+    <div class="board-main">
+
+      <!-- ================= CỘT TRÁI ================= -->
+      <div class="col-left">
+
+        <!-- 1 · CÀ PHÊ -->
+        <section class="category" data-od-id="category-ca-phe">
+          <div class="category-header">
+            <span class="category-number">1</span>
+            <span class="category-title">Cà phê</span>
+          </div>
+          <div class="coffee-groups">  <!-- Robusta và Arabica xếp chồng thành hai nhóm riêng, cùng lưới cột 315 + 40px -->
+
+            <!-- Robusta -->
+            <div>
+              <div class="sub-label">Robusta Gia Lai</div>
+              <div class="products-row" style="--gap:40px; --pw:315px; --shot:315px; --name-lines:2;">
+                <div class="product">
+                  <div class="shot">
+                    <img src="assets/ca-phe-den.png" alt="Cà phê đen" width="1109" height="1418" style="width:196px; height:250px; border-radius:14px;">
+                  </div>
+                  <span class="name">Cà phê đen</span>
+                  <span class="name-en" lang="en">Black Coffee</span>
+                  <span class="price">25</span>
+                </div>
+                <div class="product">
+                  <div class="shot">
+                    <img src="assets/ca-phe-nau.png" alt="Cà phê nâu" width="1109" height="1418" style="width:196px; height:250px; border-radius:14px;">
+                  </div>
+                  <span class="name">Cà phê nâu</span>
+                  <span class="name-en" lang="en">Milk Coffee</span>
+                  <span class="price">30</span>
+                </div>
+                <div class="product">
+                  <div class="shot">
+                    <img src="assets/bac-siu.png" alt="Bạc sỉu" width="1101" height="1429" style="width:223px; height:290px; border-radius:14px;">
+                  </div>
+                  <span class="name">Bạc sỉu / Cà phê muối</span>
+                  <span class="name-en" lang="en">Bac Xiu / Salted Coffee</span>
+                  <span class="price">35</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Arabica -->
+            <div>
+              <div class="sub-label">Arabica Blend</div>
+              <div class="products-row" style="--gap:40px; --pw:315px; --shot:315px; --name-lines:2;">
+                <div class="product">
+                  <div class="shot">
+                    <img src="assets/espresso.png" alt="Espresso" width="1109" height="1418" style="width:219px; height:280px; border-radius:14px;">
+                  </div>
+                  <span class="name">Espresso</span>
+                  <span class="name-en" lang="en">Espresso</span>
+                  <span class="price">35</span>
+                </div>
+                <div class="product">
+                  <div class="shot">
+                    <img src="assets/latte-cappu.png" alt="Latte / Cappuccino" width="1024" height="1536" style="width:210px; height:315px; border-radius:14px;">
+                  </div>
+                  <span class="name">Latte / Cappu</span>
+                  <span class="name-en" lang="en">Latte / Cappuccino</span>
+                  <span class="price">45</span>
+                </div>
+                <div class="product">
+                  <div class="shot">
+                    <img src="assets/americano.png" alt="Americano" width="1086" height="1448" style="width:236px; height:315px; border-radius:14px;">
+                  </div>
+                  <span class="name">Americano</span>
+                  <span class="name-en" lang="en">Americano</span>
+                  <span class="price">35</span>
+                </div>
+                <div class="product">
+                  <div class="shot">
+                    <span class="starred"><img src="assets/coldbrew-chanh-vang.png" alt="Cold brew chanh vàng" width="1086" height="1448" style="width:236px; height:315px; border-radius:14px;"><svg class="star-badge" style="--star-top:-7px; --star-right:-19px;" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><g transform="rotate(-2.5 60 60)"><path class="rim" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path><path class="body" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path></g></svg></span>
+                  </div>
+                  <span class="name">Cold Brew<br>Chanh vàng</span>
+                  <span class="name-en" lang="en">Lemon Cold Brew</span>
+                  <span class="price">50</span>
+                </div>
+                <div class="product">
+                  <div class="shot">
+                    <img src="assets/coldbrew-vai.png" alt="Cold brew trái cây" width="1086" height="1448" style="width:236px; height:315px; border-radius:14px;">
+                  </div>
+                  <span class="name">Cold Brew<br>Vải / Sấu / Mơ</span>
+                  <span class="name-en" lang="en">Lychee / Sau / Apricot</span>
+                  <span class="price">50</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 2 · TRÀ  |  3 · MATCHA -->
+        <div class="row-2col" style="--colgap:64px;">
+
+          <section class="category" data-od-id="category-tra">
+            <div class="category-header">
+              <span class="category-number">2</span>
+              <span class="category-title">Trà</span>
+            </div>
+            <div class="products-row" style="--gap:18px; --pw:322px; --shot:322px; --name-lines:2;">
+              <div class="product">
+                <div class="shot">
+                  <span class="starred"><img src="assets/tra-mo-muoi-glass.png" alt="Trà mơ muối ô mai" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;"><svg class="star-badge" style="--star-top:18px; --star-right:23px;" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><g transform="rotate(-2.5 60 60)"><path class="rim" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path><path class="body" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path></g></svg></span>
+                </div>
+                <span class="name">Trà mơ muối<br>ô mai</span>
+                <span class="name-en" lang="en">Salted Apricot Tea</span>
+                <span class="price">45</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <span class="starred"><img src="assets/tra-vai-man-tam-hoa-glass.png" alt="Trà vải mận tam hoa" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;"><svg class="star-badge" style="--star-top:-10px; --star-right:30px;" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><g transform="rotate(-2.5 60 60)"><path class="rim" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path><path class="body" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path></g></svg></span>
+                </div>
+                <span class="name">Trà vải mận<br>ba hoa</span>
+                <span class="name-en" lang="en">Lychee Plum Tea</span>
+                <span class="price">45</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/tra-dao-atiso-glass.png" alt="Trà đào atisô" width="500" height="500" style="width:322px; height:322px; border-radius:16px;">
+                </div>
+                <span class="name">Trà đào atisô</span>
+                <span class="name-en" lang="en">Peach Artichoke Tea</span>
+                <span class="price">45</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/tra-dao-cam-xa-glass.png" alt="Trà đào cam xả" width="500" height="500" style="width:322px; height:322px; border-radius:16px;">
+                </div>
+                <span class="name">Trà đào cam xả</span>
+                <span class="name-en" lang="en">Peach Orange Lemongrass</span>
+                <span class="price">45</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/tra-oi-hong-glass.png" alt="Trà ổi hồng" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;">
+                </div>
+                <span class="name">Trà ổi hồng</span>
+                <span class="name-en" lang="en">Pink Guava Tea</span>
+                <span class="price">45</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="category" data-od-id="category-matcha">
+            <div class="category-header">
+              <span class="category-number">3</span>
+              <span class="category-title">Matcha</span>
+            </div>
+            <div class="products-row" style="--gap:36px; --pw:344px; --shot:322px; --name-lines:2;">
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/matcha-coco.png" alt="Matcha dừa xiêm" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;">
+                </div>
+                <span class="name">Matcha dừa xiêm</span>
+                <span class="name-en" lang="en">Coconut Matcha</span>
+                <span class="price">55</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <span class="starred"><img src="assets/matcha-coldwisk.png" alt="Matcha cold whisk yến mạch" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;"><svg class="star-badge" style="--star-top:-9px; --star-right:30px;" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><g transform="rotate(-2.5 60 60)"><path class="rim" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path><path class="body" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path></g></svg></span>
+                </div>
+                <span class="name">Matcha cold whisk<br>yến mạch</span>
+                <span class="name-en" lang="en">Oat Cold Whisk Matcha</span>
+                <span class="price">55</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/matcha-latte-new.png" alt="Matcha latte" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;">
+                </div>
+                <span class="name">Matcha latte</span>
+                <span class="name-en" lang="en">Matcha Latte</span>
+                <span class="price">50</span>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- 4 · TRÀ SỮA  |  5 · TRÀ CHANH -->
+        <div class="row-2col" style="--colgap:64px;">
+
+          <section class="category" data-od-id="category-tra-sua">
+            <div class="category-header">
+              <span class="category-number">4</span>
+              <span class="category-title">Trà sữa</span>
+            </div>
+            <div class="products-row" style="--gap:48px; --pw:380px; --shot:322px; --name-lines:1;">
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/tra-sua-hat-de.png" alt="Trà sữa hạt dẻ" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
+                </div>
+                <span class="name">Trà sữa hạt dẻ</span>
+                <span class="name-en" lang="en">Chestnut Milk Tea</span>
+                <span class="price">50</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/o-long-sua.png" alt="Ô long hạnh nhân" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
+                </div>
+                <span class="name">Ô long hạnh nhân</span>
+                <span class="name-en" lang="en">Almond Oolong</span>
+                <span class="price">50</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/hong-tra-thach-den.png" alt="Hồng trà thạch đen" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
+                </div>
+                <span class="name">Hồng trà thạch đen</span>
+                <span class="name-en" lang="en">Black Tea with Grass Jelly</span>
+                <span class="price">50</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/tra-sua-ca-phe.png" alt="Trà sữa cà phê" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
+                </div>
+                <span class="name">Trà sữa cà phê</span>
+                <span class="name-en" lang="en">Coffee Milk Tea</span>
+                <span class="price">50</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="category" data-od-id="category-tra-chanh">
+            <div class="category-header">
+              <span class="category-number">5</span>
+              <span class="category-title">Trà chanh</span>
+            </div>
+            <div class="products-row" style="--gap:32px; --pw:350px; --shot:322px; --name-lines:1;">
+              <div class="product">
+                <div class="shot">
+                  <div class="ph-shot">Ảnh 1</div>
+                </div>
+                <span class="name tbd">Tên món</span>
+                <span class="name-en tbd" lang="en">English name</span>
+                <span class="price tbd">—</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <div class="ph-shot">Ảnh 2</div>
+                </div>
+                <span class="name tbd">Tên món</span>
+                <span class="name-en tbd" lang="en">English name</span>
+                <span class="price tbd">—</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <div class="ph-shot">Ảnh 3</div>
+                </div>
+                <span class="name tbd">Tên món</span>
+                <span class="name-en tbd" lang="en">English name</span>
+                <span class="price tbd">—</span>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+      </div>
+
+      <!-- ================= CỘT PHẢI ================= -->
+      <div class="col-right">
+
+        <!-- 6 · SINH TỐ - SỮA CHUA -->
+        <section class="category" data-od-id="category-sinh-to">
+          <div class="category-header">
+            <span class="category-number">6</span>
+            <span class="category-title">Sinh tố - Sữa chua</span>
+          </div>
+          <div class="products-row" style="--gap:15px; --pw:350px; --shot:322px; --name-lines:2;">
+            <div class="product">
+              <div class="shot">
+                <img src="assets/sen-com-cot-dua.png" alt="Sen cốm cốt dừa" width="1024" height="1536" style="width:215px; height:322px; border-radius:14px;">
+              </div>
+              <span class="name">Sen cốm cốt dừa</span>
+              <span class="name-en" lang="en">Lotus & Green Rice Coconut</span>
+              <span class="price">55</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/chanh-tuyet.png" alt="Chanh tuyết" width="1024" height="1536" style="width:215px; height:322px; border-radius:14px;">
+              </div>
+              <span class="name">Chanh tuyết</span>
+              <span class="name-en" lang="en">Frosty Lemonade</span>
+              <span class="price">50</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/sinh-to-xoai-glass.png" alt="Sinh tố xoài" width="1024" height="1536" style="width:215px; height:322px; border-radius:14px;">
+              </div>
+              <span class="name">Sinh tố xoài</span>
+              <span class="name-en" lang="en">Mango Smoothie</span>
+              <span class="price">45</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/mang-cau-glass.png" alt="Sinh tố mãng cầu" width="1024" height="1536" style="width:215px; height:322px; border-radius:14px;">
+              </div>
+              <span class="name">Sinh tố mãng cầu</span>
+              <span class="name-en" lang="en">Soursop Smoothie</span>
+              <span class="price">50</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/sua-chua-chanh-leo-glass.png" alt="Sữa chua chanh leo" width="1024" height="1536" style="width:215px; height:322px; border-radius:14px;">
+              </div>
+              <span class="name">Sữa chua chanh leo</span>
+              <span class="name-en" lang="en">Passion Fruit Yogurt</span>
+              <span class="price">50</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7 · NƯỚC ÉP -->
+        <section class="category" data-od-id="category-nuoc-ep">
+          <div class="category-header">
+            <span class="category-number">7</span>
+            <span class="category-title">Nước ép</span>
+          </div>
+          <div class="products-row" style="--gap:15px; --pw:350px; --shot:322px; --name-lines:2;">
+            <div class="product">
+              <div class="shot">
+                <img src="assets/dua-hau-glass.png" alt="Dưa hấu" width="1024" height="1536" style="width:215px; height:322px; border-radius:14px;">
+              </div>
+              <span class="name">Dưa hấu</span>
+              <span class="name-en" lang="en">Watermelon</span>
+              <span class="price">40</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/nuoc-ep-luu-glass.png" alt="Lựu" width="1086" height="1448" style="width:242px; height:322px; border-radius:14px;">
+              </div>
+              <span class="name">Lựu</span>
+              <span class="name-en" lang="en">Pomegranate</span>
+              <span class="price">50</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/nuoc-ep-tao-glass.png" alt="Cam / Táo" width="1024" height="1536" style="width:215px; height:322px; border-radius:14px;">
+              </div>
+              <span class="name">Cam / Táo</span>
+              <span class="name-en" lang="en">Orange / Apple</span>
+              <span class="price">45</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/chanh-day-glass.png" alt="Chanh dây / Dứa" width="1024" height="1536" style="width:215px; height:322px; border-radius:14px;">
+              </div>
+              <span class="name">Chanh dây</span>
+              <span class="name-en" lang="en">Passion Fruit</span>
+              <span class="price">40</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/chanh-tuoi-glass.png" alt="Chanh tươi" width="1024" height="1536" style="width:215px; height:322px; border-radius:14px;">
+              </div>
+              <span class="name">Chanh tươi</span>
+              <span class="name-en" lang="en">Lime Juice</span>
+              <span class="price">30</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8 · ĐỒ UỐNG KHÁC — chuyển về cột phải như bố cục cũ -->
+        <section class="category" data-od-id="category-do-uong-khac">
+          <div class="category-header">
+            <span class="category-number">8</span>
+            <span class="category-title">Đồ uống khác</span>
+          </div>
+          <div class="products-row" style="--gap:15px; --pw:350px; --shot:310px; --name-lines:2;">
+            <div class="product">
+              <div class="shot">
+                <img src="assets/sua-tuoi-tran-chau.png" alt="Sữa tươi trân châu" width="1024" height="1536" style="width:207px; height:310px; border-radius:14px;">
+              </div>
+              <span class="name">Sữa tươi<br>trân châu</span>
+              <span class="name-en" lang="en">Brown Sugar Pearl Milk</span>
+              <span class="price">45</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/cacao-nong.png" alt="Cacao" width="1086" height="1448" style="width:233px; height:310px; border-radius:14px;">
+              </div>
+              <span class="name">Cacao</span>
+              <span class="name-en" lang="en">Cocoa</span>
+              <span class="price">45</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/tra-gung-mat-ong.png" alt="Trà gừng mật ong" width="1216" height="1293" style="width:230px; height:244px; border-radius:14px;">
+              </div>
+              <span class="name">Trà gừng<br>mật ong</span>
+              <span class="name-en" lang="en">Honey Ginger Tea</span>
+              <span class="price">35</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/tra-hoa-cuc-tao-do.png" alt="Trà hoa cúc táo đỏ" width="1216" height="1293" style="width:230px; height:244px; border-radius:14px;">
+              </div>
+              <span class="name">Trà hoa cúc<br>táo đỏ</span>
+              <span class="name-en" lang="en">Chrysanthemum Jujube Tea</span>
+              <span class="price">40</span>
+            </div>
+            <div class="product">
+              <div class="shot">
+                <img src="assets/dua-xiem.png" alt="Dừa xiêm" width="1254" height="1254" style="width:290px; height:290px; border-radius:14px;">
+              </div>
+              <span class="name">Dừa xiêm</span>
+              <span class="name-en" lang="en">Fresh Coconut</span>
+              <span class="price">35</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9 · ĐỒ ĂN NHẸ + minh hoạ quán ở góc phải dưới (bố cục cũ) -->
+        <div class="snack-block">
+          <section class="category" data-od-id="category-do-an-nhe">
+            <div class="category-header">
+              <span class="category-number">9</span>
+              <span class="category-title">Đồ ăn nhẹ</span>
+            </div>
+            <div class="products-row" style="--gap:32px; --pw:360px; --shot:310px; --name-lines:1;">
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/huong-duong.png" alt="Hướng dương" width="1238" height="1271" style="width:253px; height:260px; border-radius:14px;">
+                </div>
+                <span class="name">Hướng dương</span>
+                <span class="name-en" lang="en">Sunflower Seeds</span>
+                <span class="price">15</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/banh-chuoi.png" alt="Bánh chuối" width="1246" height="1262" style="width:257px; height:260px; border-radius:14px;">
+                </div>
+                <span class="name">Bánh chuối</span>
+                <span class="name-en" lang="en">Banana Cake</span>
+                <span class="price">40</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/croissant.png" alt="Croissant" width="1254" height="1254" style="width:260px; height:260px; border-radius:14px;">
+                </div>
+                <span class="name">Croissant</span>
+                <span class="name-en" lang="en">Croissant</span>
+                <span class="price">35</span>
+              </div>
+            </div>
+          </section>
+
+          <img class="sketch" src="assets/sketch-nang-new.png" alt="Minh hoạ quán Nâng" width="1339" height="1175">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+</body></html>
