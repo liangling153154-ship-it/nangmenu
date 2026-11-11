@@ -1,11 +1,11 @@
-# Repo chi xuat ban menu 15-09 lam index + 40 anh no dung.
+# Repo chi xuat ban menu 15-09 lam index + anh no dung.
 # Cach lam: bo tat ca, roi mo lai dung nhung gi can deploy.
 /*
 !.gitignore
 !index.html
 !assets/
 
-# Trong assets/ chi giu anh ma index.html tham chieu
+# Trong assets/ chi giu anh ma index.html tham chieu (39 anh)
 assets/*
 !assets/americano.png
 !assets/bac-siu.png
@@ -42,7 +42,6 @@ assets/*
 !assets/tra-dao-cam-xa-glass.png
 !assets/tra-gung-mat-ong.png
 !assets/tra-hoa-cuc-tao-do.png
-!assets/tra-mo-muoi-glass.png
 !assets/tra-oi-hong-glass.png
 !assets/tra-sua-ca-phe.png
 !assets/tra-sua-hat-de.png
