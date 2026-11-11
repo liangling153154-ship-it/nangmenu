@@ -421,7 +421,7 @@
           </div>
           <div class="coffee-groups">  <!-- Robusta và Arabica xếp chồng thành hai nhóm riêng, cùng lưới cột 315 + 40px -->
 
-            <!-- Robusta -->
+            <!-- Robusta — 7 món: 7 × 315 + 6 × 40 = 2445px trong 2869px -->
             <div>
               <div class="sub-label">Robusta Gia Lai</div>
               <div class="products-row" style="--gap:40px; --pw:315px; --shot:315px; --name-lines:2;">
@@ -445,14 +445,49 @@
                   <div class="shot">
                     <img src="assets/bac-siu.png" alt="Bạc sỉu" width="1101" height="1429" style="width:223px; height:290px; border-radius:14px;">
                   </div>
-                  <span class="name">Bạc sỉu / Cà phê muối</span>
-                  <span class="name-en" lang="en">Bac Xiu / Salted Coffee</span>
+                  <span class="name">Bạc sỉu</span>
+                  <span class="name-en" lang="en">Bac Xiu</span>
                   <span class="price">35</span>
+                </div>
+                <!-- Cà phê muối — tách khỏi Bạc sỉu, chờ ảnh thật -->
+                <div class="product">
+                  <div class="shot">
+                    <div class="ph-shot" style="width:223px; height:290px;">Chờ ảnh</div>
+                  </div>
+                  <span class="name">Cà phê muối</span>
+                  <span class="name-en" lang="en">Salted Coffee</span>
+                  <span class="price">35</span>
+                </div>
+                <!-- 3 món mới — chờ ảnh và giá -->
+                <div class="product">
+                  <div class="shot">
+                    <div class="ph-shot" style="width:223px; height:290px;">Chờ ảnh</div>
+                  </div>
+                  <span class="name">Cà phê<br>cốt dừa</span>
+                  <span class="name-en" lang="en">Coconut Coffee</span>
+                  <span class="price tbd">—</span>
+                </div>
+                <div class="product">
+                  <div class="shot">
+                    <div class="ph-shot" style="width:223px; height:290px;">Chờ ảnh</div>
+                  </div>
+                  <span class="name">Cà phê<br>thạch đen</span>
+                  <span class="name-en" lang="en">Grass Jelly Coffee</span>
+                  <span class="price tbd">—</span>
+                </div>
+                <div class="product">
+                  <div class="shot">
+                    <div class="ph-shot" style="width:223px; height:290px;">Chờ ảnh</div>
+                  </div>
+                  <span class="name">Cà phê<br>hạnh nhân</span>
+                  <span class="name-en" lang="en">Almond Coffee</span>
+                  <span class="price tbd">—</span>
                 </div>
               </div>
             </div>
 
-            <!-- Arabica -->
+            <!-- Arabica — 8 món: 8 × 315 + 7 × 40 = 2800px trong 2869px.
+                 Thêm món nữa thì phải hạ --pw hoặc --gap, nếu không sẽ tràn. -->
             <div>
               <div class="sub-label">Arabica Blend</div>
               <div class="products-row" style="--gap:40px; --pw:315px; --shot:315px; --name-lines:2;">
@@ -470,7 +505,7 @@
                   </div>
                   <span class="name">Latte / Cappu</span>
                   <span class="name-en" lang="en">Latte / Cappuccino</span>
-                  <span class="price">45</span>
+                  <span class="price">50</span>
                 </div>
                 <div class="product">
                   <div class="shot">
@@ -479,6 +514,24 @@
                   <span class="name">Americano</span>
                   <span class="name-en" lang="en">Americano</span>
                   <span class="price">35</span>
+                </div>
+                <!-- Ame cam — cạnh Americano, chờ ảnh thật -->
+                <div class="product">
+                  <div class="shot">
+                    <div class="ph-shot" style="width:236px; height:315px;">Chờ ảnh</div>
+                  </div>
+                  <span class="name">Ame cam</span>
+                  <span class="name-en" lang="en">Orange Americano</span>
+                  <span class="price">50</span>
+                </div>
+                <!-- Mocha — chờ ảnh thật -->
+                <div class="product">
+                  <div class="shot">
+                    <div class="ph-shot" style="width:236px; height:315px;">Chờ ảnh</div>
+                  </div>
+                  <span class="name">Mocha</span>
+                  <span class="name-en" lang="en">Mocha</span>
+                  <span class="price">55</span>
                 </div>
                 <div class="product">
                   <div class="shot">
@@ -490,11 +543,20 @@
                 </div>
                 <div class="product">
                   <div class="shot">
-                    <img src="assets/coldbrew-vai.png" alt="Cold brew trái cây" width="1086" height="1448" style="width:236px; height:315px; border-radius:14px;">
+                    <img src="assets/coldbrew-vai.png" alt="Cold brew vải / sấu" width="1086" height="1448" style="width:236px; height:315px; border-radius:14px;">
                   </div>
-                  <span class="name">Cold Brew<br>Vải / Sấu / Mơ</span>
-                  <span class="name-en" lang="en">Lychee / Sau / Apricot</span>
+                  <span class="name">Cold Brew<br>Vải / Sấu</span>
+                  <span class="name-en" lang="en">Lychee / Sau</span>
                   <span class="price">50</span>
+                </div>
+                <!-- Cold Brew Quýt — món nên thử (có sao), chờ ảnh và giá -->
+                <div class="product">
+                  <div class="shot">
+                    <span class="starred"><span class="ph-shot" style="width:236px; height:315px;">Chờ ảnh</span><svg class="star-badge" style="--star-top:-10px; --star-right:-10px;" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><g transform="rotate(-2.5 60 60)"><path class="rim" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path><path class="body" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path></g></svg></span>
+                  </div>
+                  <span class="name">Cold Brew<br>Quýt</span>
+                  <span class="name-en" lang="en">Tangerine Cold Brew</span>
+                  <span class="price tbd">—</span>
                 </div>
               </div>
             </div>
