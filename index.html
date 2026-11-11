@@ -31,7 +31,8 @@
      NÂNG CAFE — BẢNG NGANG B3
      Khổ in: 500 × 353 mm (B3 ngang) · 10px = 1mm → 5000 × 3530 px
      Bố cục dựng riêng cho B3: cột trái rộng 62% chứa 4 hàng
-     Cà phê · Trà|Matcha · Trà sữa|Trà chanh · Đồ uống khác|Đồ ăn nhẹ.
+     Cà phê · Matcha|Trà sữa · Trà. Cột phải: Sinh tố|Nước ép ·
+     Đồ uống khác · Đồ ăn nhẹ + minh hoạ.
      Signature đã chuyển sang menu riêng (menu-special.html).
      Cột phải: Sinh tố · Nước ép · minh hoạ quán.
      Hai cột dùng chung chiều cao hàng + khe --rhythm → các hàng thẳng nhau.
@@ -71,14 +72,14 @@
 
     /* Chiều cao 3 HÀNG dùng chung cho cả hai cột → đầu mục hai bên thẳng hàng.
        Mỗi số = chiều cao thực của cụm cao nhất trong hàng đó:
-         hàng 1  trái Cà phê 1344  |  phải Sinh tố 644 + Nước ép 644
-         hàng 2  trái Trà|Matcha 644  |  phải Đồ uống khác 632
-         hàng 3  trái Trà sữa|Trà chanh 594  |  phải Đồ ăn nhẹ 582 + minh hoạ
-       Tổng 2582px + 2 khe 200px = 2982px trong vùng 3250px → các hàng dồn
-       lên trên, phần dư 268px nằm ở đáy. Khe bằng nhau ở CẢ HAI cột. */
+         hàng 1  trái Cà phê 1344        |  phải Sinh tố 644 + Nước ép 644
+         hàng 2  trái Matcha|Trà sữa 644 |  phải Đồ uống khác 632
+         hàng 3  trái Trà 644            |  phải Đồ ăn nhẹ 582 + minh hoạ
+       Tổng 2632px + 2 khe 200px = 3032px trong vùng 3250px → các hàng dồn
+       lên trên, phần dư 218px nằm ở đáy. Khe bằng nhau ở CẢ HAI cột. */
     --row1: 1344px;
     --row2:  644px;
-    --row3:  594px;
+    --row3:  644px;  /* Trà có tên 2 dòng nên cao 644, không phải 594 như Trà sữa */
 
     /* Huy hiệu sao — ĐANG THỬ NGHIỆM. Hai số duy nhất cần chỉnh khi đánh giá. */
     --star-size:   72px;  /* đường kính sao        */
@@ -300,12 +301,12 @@
     white-space: nowrap;
   }
 
-  /* ---------- Ô giữ chỗ — mục Trà chanh, chưa có ảnh & nội dung ----------
-     Khung nét đứt theo đúng màu đường kẻ của menu, KHÔNG phải hộp xám,
-     và chiếm đúng 258×258px như ảnh mục Trà sữa để bố cục đã đúng chỗ
-     ngay từ bây giờ — thay ảnh thật vào là không phải chỉnh lại gì.
-     Khi có nội dung: đổi <div class="ph-shot"> thành <img …> và bỏ
-     class .tbd ở tên / mô tả / giá. Xoá hai quy tắc này là sạch dấu vết. */
+  /* ---------- Ô giữ chỗ cho món chưa có ảnh (6 món mới ở nhóm Cà phê) ----
+     Khung nét đứt theo đúng màu đường kẻ của menu, KHÔNG phải hộp xám.
+     Cỡ mặc định 258×258px; mỗi món ghi đè width/height inline cho khớp
+     ảnh bên cạnh, nên bố cục đã đúng chỗ sẵn — thay ảnh thật vào là xong.
+     Khi có ảnh: đổi thẻ .ph-shot thành <img …>; khi có giá thì bỏ
+     class .tbd ở giá. Xoá hai quy tắc này là sạch dấu vết. */
   .ph-shot {
     width: 258px;
     height: 258px;
@@ -564,9 +565,89 @@
           </div>
         </section>
 
-        <!-- 2 · TRÀ  |  3 · MATCHA -->
+        <!-- 3 · MATCHA  |  4 · TRÀ SỮA
+             Matcha về chỗ cũ của Trà, Trà sữa lên chỗ cũ của Matcha.
+             Ngân sách 2869px: 3×344 + 2×36 = 1104  ·  64  ·  4×380 + 3×48 = 1664 → 2832px -->
         <div class="row-2col" style="--colgap:64px;">
 
+          <section class="category" data-od-id="category-matcha">
+            <div class="category-header">
+              <span class="category-number">3</span>
+              <span class="category-title">Matcha</span>
+            </div>
+            <div class="products-row" style="--gap:36px; --pw:344px; --shot:322px; --name-lines:2;">
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/matcha-coco.png" alt="Matcha dừa xiêm" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;">
+                </div>
+                <span class="name">Matcha dừa xiêm</span>
+                <span class="name-en" lang="en">Coconut Matcha</span>
+                <span class="price">55</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <span class="starred"><img src="assets/matcha-coldwisk.png" alt="Matcha cold whisk yến mạch" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;"><svg class="star-badge" style="--star-top:-9px; --star-right:30px;" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><g transform="rotate(-2.5 60 60)"><path class="rim" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path><path class="body" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path></g></svg></span>
+                </div>
+                <span class="name">Matcha cold whisk<br>yến mạch</span>
+                <span class="name-en" lang="en">Oat Cold Whisk Matcha</span>
+                <span class="price">55</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/matcha-latte-new.png" alt="Matcha latte" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;">
+                </div>
+                <span class="name">Matcha latte</span>
+                <span class="name-en" lang="en">Matcha Latte</span>
+                <span class="price">50</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="category" data-od-id="category-tra-sua">
+            <div class="category-header">
+              <span class="category-number">4</span>
+              <span class="category-title">Trà sữa</span>
+            </div>
+            <div class="products-row" style="--gap:48px; --pw:380px; --shot:322px; --name-lines:1;">
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/tra-sua-hat-de.png" alt="Trà sữa hạt dẻ" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
+                </div>
+                <span class="name">Trà sữa hạt dẻ</span>
+                <span class="name-en" lang="en">Chestnut Milk Tea</span>
+                <span class="price">50</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/o-long-sua.png" alt="Ô long hạnh nhân" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
+                </div>
+                <span class="name">Ô long hạnh nhân</span>
+                <span class="name-en" lang="en">Almond Oolong</span>
+                <span class="price">50</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/hong-tra-thach-den.png" alt="Hồng trà thạch đen" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
+                </div>
+                <span class="name">Hồng trà thạch đen</span>
+                <span class="name-en" lang="en">Black Tea with Grass Jelly</span>
+                <span class="price">50</span>
+              </div>
+              <div class="product">
+                <div class="shot">
+                  <img src="assets/tra-sua-ca-phe.png" alt="Trà sữa cà phê" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
+                </div>
+                <span class="name">Trà sữa cà phê</span>
+                <span class="name-en" lang="en">Coffee Milk Tea</span>
+                <span class="price">50</span>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- 2 · TRÀ — xuống chỗ cũ của Trà sữa, chiếm cả hàng
+             (Trà chanh đã bỏ nên hàng này chỉ còn một nhóm) -->
           <section class="category" data-od-id="category-tra">
             <div class="category-header">
               <span class="category-number">2</span>
@@ -615,120 +696,6 @@
               </div>
             </div>
           </section>
-
-          <section class="category" data-od-id="category-matcha">
-            <div class="category-header">
-              <span class="category-number">3</span>
-              <span class="category-title">Matcha</span>
-            </div>
-            <div class="products-row" style="--gap:36px; --pw:344px; --shot:322px; --name-lines:2;">
-              <div class="product">
-                <div class="shot">
-                  <img src="assets/matcha-coco.png" alt="Matcha dừa xiêm" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;">
-                </div>
-                <span class="name">Matcha dừa xiêm</span>
-                <span class="name-en" lang="en">Coconut Matcha</span>
-                <span class="price">55</span>
-              </div>
-              <div class="product">
-                <div class="shot">
-                  <span class="starred"><img src="assets/matcha-coldwisk.png" alt="Matcha cold whisk yến mạch" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;"><svg class="star-badge" style="--star-top:-9px; --star-right:30px;" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><g transform="rotate(-2.5 60 60)"><path class="rim" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path><path class="body" d="M60.00 16.60L71.44 43.72L100.49 47.77L77.95 66.22L85.76 94.43L60.18 80.20L34.61 94.21L41.41 65.56L18.13 47.47L48.14 44.27Z"></path></g></svg></span>
-                </div>
-                <span class="name">Matcha cold whisk<br>yến mạch</span>
-                <span class="name-en" lang="en">Oat Cold Whisk Matcha</span>
-                <span class="price">55</span>
-              </div>
-              <div class="product">
-                <div class="shot">
-                  <img src="assets/matcha-latte-new.png" alt="Matcha latte" width="1254" height="1254" style="width:322px; height:322px; border-radius:16px;">
-                </div>
-                <span class="name">Matcha latte</span>
-                <span class="name-en" lang="en">Matcha Latte</span>
-                <span class="price">50</span>
-              </div>
-            </div>
-          </section>
-
-        </div>
-
-        <!-- 4 · TRÀ SỮA  |  5 · TRÀ CHANH -->
-        <div class="row-2col" style="--colgap:64px;">
-
-          <section class="category" data-od-id="category-tra-sua">
-            <div class="category-header">
-              <span class="category-number">4</span>
-              <span class="category-title">Trà sữa</span>
-            </div>
-            <div class="products-row" style="--gap:48px; --pw:380px; --shot:322px; --name-lines:1;">
-              <div class="product">
-                <div class="shot">
-                  <img src="assets/tra-sua-hat-de.png" alt="Trà sữa hạt dẻ" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
-                </div>
-                <span class="name">Trà sữa hạt dẻ</span>
-                <span class="name-en" lang="en">Chestnut Milk Tea</span>
-                <span class="price">50</span>
-              </div>
-              <div class="product">
-                <div class="shot">
-                  <img src="assets/o-long-sua.png" alt="Ô long hạnh nhân" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
-                </div>
-                <span class="name">Ô long hạnh nhân</span>
-                <span class="name-en" lang="en">Almond Oolong</span>
-                <span class="price">50</span>
-              </div>
-              <div class="product">
-                <div class="shot">
-                  <img src="assets/hong-tra-thach-den.png" alt="Hồng trà thạch đen" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
-                </div>
-                <span class="name">Hồng trà thạch đen</span>
-                <span class="name-en" lang="en">Black Tea with Grass Jelly</span>
-                <span class="price">50</span>
-              </div>
-              <div class="product">
-                <div class="shot">
-                  <img src="assets/tra-sua-ca-phe.png" alt="Trà sữa cà phê" width="1254" height="1254" style="width:258px; height:258px; border-radius:18px;">
-                </div>
-                <span class="name">Trà sữa cà phê</span>
-                <span class="name-en" lang="en">Coffee Milk Tea</span>
-                <span class="price">50</span>
-              </div>
-            </div>
-          </section>
-
-          <section class="category" data-od-id="category-tra-chanh">
-            <div class="category-header">
-              <span class="category-number">5</span>
-              <span class="category-title">Trà chanh</span>
-            </div>
-            <div class="products-row" style="--gap:32px; --pw:350px; --shot:322px; --name-lines:1;">
-              <div class="product">
-                <div class="shot">
-                  <div class="ph-shot">Ảnh 1</div>
-                </div>
-                <span class="name tbd">Tên món</span>
-                <span class="name-en tbd" lang="en">English name</span>
-                <span class="price tbd">—</span>
-              </div>
-              <div class="product">
-                <div class="shot">
-                  <div class="ph-shot">Ảnh 2</div>
-                </div>
-                <span class="name tbd">Tên món</span>
-                <span class="name-en tbd" lang="en">English name</span>
-                <span class="price tbd">—</span>
-              </div>
-              <div class="product">
-                <div class="shot">
-                  <div class="ph-shot">Ảnh 3</div>
-                </div>
-                <span class="name tbd">Tên món</span>
-                <span class="name-en tbd" lang="en">English name</span>
-                <span class="price tbd">—</span>
-              </div>
-            </div>
-          </section>
-
-        </div>
 
       </div>
 
